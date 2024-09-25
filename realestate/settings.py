@@ -48,14 +48,14 @@ ROBOTSTXT_OBEY = False
 #}
 
 
-# Splash Server Endpoint
-SPLASH_URL = 'http://localhost:8050'
+# # Splash Server Endpoint
+# SPLASH_URL = 'http://localhost:8050'
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 SPIDER_MIDDLEWARES = {
 #     "realestate.middlewares.RealestateSpiderMiddleware": 543,
-      'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+      # 'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
 }
 
 # Enable or disable downloader middlewares
@@ -120,5 +120,5 @@ REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 
-# Define the Splash DupeFilter
-DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+# # Define the Splash DupeFilter
+# DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
