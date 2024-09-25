@@ -73,7 +73,7 @@ SPIDER_MIDDLEWARES = {
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    "realestate.pipelines.RealestatePipeline": 300,
-   # "realestate.pipelines.SaveToMySQLPipeline": 300,
+   "realestate.pipelines.SaveToMySQLPipeline": 400,
 
 }
 
