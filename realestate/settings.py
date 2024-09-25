@@ -9,6 +9,7 @@
 
 BOT_NAME = "realestate"
 
+
 SPIDER_MODULES = ["realestate.spiders"]
 NEWSPIDER_MODULE = "realestate.spiders"
 
@@ -21,7 +22,7 @@ PLAYWRIGHT_PAGE_WAIT = 3000  # Wait for 3 seconds to ensure JavaScript is render
 #USER_AGENT = "realestate (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -46,17 +47,21 @@ ROBOTSTXT_OBEY = True
 #    "Accept-Language": "en",
 #}
 
+
+# Splash Server Endpoint
+SPLASH_URL = 'http://localhost:8050'
+
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
-#    "realestate.middlewares.RealestateSpiderMiddleware": 543,
-#}
+SPIDER_MIDDLEWARES = {
+#     "realestate.middlewares.RealestateSpiderMiddleware": 543,
+      'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    "realestate.middlewares.RealestateDownloaderMiddleware": 543,
-#}
+#    
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -68,7 +73,22 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    "realestate.pipelines.RealestatePipeline": 300,
+   # "realestate.pipelines.SaveToMySQLPipeline": 300,
+
 }
+
+SCRAPEOPS_API_KEY = '09c705ce-eff0-40dc-9bdc-471222e45ea9'
+SCRAPEOPS_FAKE_HEADERS_ENABLED = True
+
+DOWNLOADER_MIDDLEWARES = {
+   # "realestate.middlewares.RealestateDownloaderMiddleware": 543,
+   'scrapy.downloadermiddlewares.offsite.OffsiteMiddleware': None,
+   # 'realestate.middlewares.ScrapeOpsFakeBrowserHeadersMiddleware': 400,
+   # 'scrapy_splash.SplashCookiesMiddleware': 723,
+   # 'scrapy_splash.SplashMiddleware': 725,
+   # 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+}
+
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -95,3 +115,6 @@ ITEM_PIPELINES = {
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
+
+# Define the Splash DupeFilter
+DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
