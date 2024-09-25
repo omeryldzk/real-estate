@@ -79,13 +79,17 @@ ITEM_PIPELINES = {
 
 SCRAPEOPS_API_KEY = '09c705ce-eff0-40dc-9bdc-471222e45ea9'
 SCRAPEOPS_FAKE_HEADERS_ENABLED = True
+EXTENSIONS = {
+    'scrapeops_scrapy.extension.ScrapeOpsMonitor': 500, 
+}
 
 DOWNLOADER_MIDDLEWARES = {
    # "realestate.middlewares.RealestateDownloaderMiddleware": 543,
    'scrapy.downloadermiddlewares.offsite.OffsiteMiddleware': None,
+   # Monitoring
+   'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550,
+   'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
    # 'realestate.middlewares.ScrapeOpsFakeBrowserHeadersMiddleware': 400,
-   # 'scrapy_splash.SplashCookiesMiddleware': 723,
-   # 'scrapy_splash.SplashMiddleware': 725,
    # 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 }
 
