@@ -78,20 +78,27 @@ ITEM_PIPELINES = {
 }
 
 SCRAPEOPS_API_KEY = '09c705ce-eff0-40dc-9bdc-471222e45ea9'
+SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = 'https://headers.scrapeops.io/v1/user-agents'
+SCRAPEOPS_NUM_RESULTS = 50
 SCRAPEOPS_FAKE_HEADERS_ENABLED = True
+
 EXTENSIONS = {
     'scrapeops_scrapy.extension.ScrapeOpsMonitor': 500, 
 }
-
+# SCRAPE-OPS
+# DOWNLOADER_MIDDLEWARES = {
+#    'scrapy.downloadermiddlewares.offsite.OffsiteMiddleware': None,
+#    # Monitoring
+#    'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550,
+#    'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
+#    'realestate.middlewares.ScrapeOpsFakeBrowserHeadersMiddleware': 400,
+#    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+# }
 DOWNLOADER_MIDDLEWARES = {
-   # "realestate.middlewares.RealestateDownloaderMiddleware": 543,
-   'scrapy.downloadermiddlewares.offsite.OffsiteMiddleware': None,
-   # Monitoring
-   'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550,
-   'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
-   # 'realestate.middlewares.ScrapeOpsFakeBrowserHeadersMiddleware': 400,
-   # 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+    'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
 }
+
 
 
 # Enable and configure the AutoThrottle extension (disabled by default)

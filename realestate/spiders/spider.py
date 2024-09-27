@@ -15,10 +15,12 @@ class HepsiemlakSpider(scrapy.Spider):
     def parse(self, response):
         # Find all listing items
         listings = response.css('ul.list-items-container li.listing-item')
-
+        counter = 0
         # Loop through each listing item
         for listing in listings:
             # Create an instance of RealestateItem
+            if(counter == 10):
+                break
             item = RealestateItem()
 
             # Populate item fields
